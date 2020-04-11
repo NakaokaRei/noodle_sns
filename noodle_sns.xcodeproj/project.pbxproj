@@ -15,11 +15,11 @@
 		B1198D6F2440B13700C8877F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1198D6E2440B13700C8877F /* ContentView.swift */; };
 		B1198D722440B33800C8877F /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1198D712440B33800C8877F /* SignUpView.swift */; };
 		B1198D742440B57300C8877F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1198D732440B57300C8877F /* HomeView.swift */; };
-		B157E9BB2441B9BA00FBF90E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B157E9BA2441B9BA00FBF90E /* GoogleService-Info.plist */; };
 		B1B3B1BF2441BF8B008E0DCE /* FireViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B3B1BE2441BF8B008E0DCE /* FireViewModel.swift */; };
 		B1B3B1C22441DBAD008E0DCE /* PostRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B3B1C12441DBAD008E0DCE /* PostRowView.swift */; };
 		B1B3B1C42441E1DD008E0DCE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B3B1C32441E1DD008E0DCE /* UserView.swift */; };
 		B1B3B1C72441E608008E0DCE /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B3B1C62441E608008E0DCE /* PostModel.swift */; };
+		B1FCDB542442243400F7102A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1FCDB532442243400F7102A /* GoogleService-Info.plist */; };
 		DEAD4A5C7C8B11F10A6A9556 /* Pods_noodle_sns.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16AEC91817E7D9A1D079C7CE /* Pods_noodle_sns.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,11 +37,11 @@
 		B1198D6E2440B13700C8877F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B1198D712440B33800C8877F /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B1198D732440B57300C8877F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		B157E9BA2441B9BA00FBF90E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B1B3B1BE2441BF8B008E0DCE /* FireViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireViewModel.swift; sourceTree = "<group>"; };
 		B1B3B1C12441DBAD008E0DCE /* PostRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRowView.swift; sourceTree = "<group>"; };
 		B1B3B1C32441E1DD008E0DCE /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		B1B3B1C62441E608008E0DCE /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		B1FCDB532442243400F7102A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "noodle_sns/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +101,8 @@
 				B1198D5E2440B07D00C8877F /* Assets.xcassets */,
 				B1198D632440B07D00C8877F /* LaunchScreen.storyboard */,
 				B1B3B1C02441BF92008E0DCE /* ViewModel */,
-				B157E9BA2441B9BA00FBF90E /* GoogleService-Info.plist */,
 				B1198D662440B07D00C8877F /* Info.plist */,
+				B1FCDB532442243400F7102A /* GoogleService-Info.plist */,
 				B1198D602440B07D00C8877F /* Preview Content */,
 			);
 			path = noodle_sns;
@@ -205,7 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1198D652440B07D00C8877F /* LaunchScreen.storyboard in Resources */,
-				B157E9BB2441B9BA00FBF90E /* GoogleService-Info.plist in Resources */,
+				B1FCDB542442243400F7102A /* GoogleService-Info.plist in Resources */,
 				B1198D622440B07D00C8877F /* Preview Assets.xcassets in Resources */,
 				B1198D5F2440B07D00C8877F /* Assets.xcassets in Resources */,
 			);
