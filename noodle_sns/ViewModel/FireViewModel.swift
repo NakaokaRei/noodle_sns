@@ -55,7 +55,7 @@ class FireViewModel: ObservableObject {
 
             if let user = user {
                 self.pushSignUp.toggle()
-                self.userID = Auth.auth().currentUser?.uid as! String
+                self.userID = Auth.auth().currentUser?.uid ?? ""
                 print(self.userID)
                 print("user : \(String(describing: user.user.email)) has been created successfully.")
             }
@@ -72,7 +72,7 @@ class FireViewModel: ObservableObject {
 
             if let user = user {
                 self.pushSignUp.toggle()
-                self.userID = Auth.auth().currentUser?.uid as! String
+                self.userID = Auth.auth().currentUser?.uid ?? ""
                 print(self.userID)
                 print("user : \(String(describing: user.user.email)) has been signed in successfully.")
             }
