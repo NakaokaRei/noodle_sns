@@ -13,6 +13,7 @@ struct UserView: View {
     @State var userName: String = ""
     var body: some View {
         VStack {
+            Text(fireviewmodel.userName)
             TextField("ユーザ名", text: $userName)
             Button(action: {self.fireviewmodel.addName(name: self.userName)}){
                 Text("ユーザー名の変更")

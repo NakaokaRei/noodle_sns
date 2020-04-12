@@ -15,6 +15,7 @@ class FireViewModel: ObservableObject {
     @Published var pushSignUp = false
     @Published var loginMess: String = "ログインしてください"
     @Published var messList: [PostModel] = []
+    @Published var userName: String = "ユーザー名"
     var DBRef:DatabaseReference!
     var userID: String = ""
     
@@ -56,6 +57,7 @@ class FireViewModel: ObservableObject {
             if let user = user {
                 self.pushSignUp.toggle()
                 self.userID = Auth.auth().currentUser?.uid ?? ""
+                self.addName(name: "")
                 print(self.userID)
                 print("user : \(String(describing: user.user.email)) has been created successfully.")
             }
@@ -66,7 +68,7 @@ class FireViewModel: ObservableObject {
         Auth.auth().signIn(withEmail: mail, password: pass) { user, error in
             if error != nil {
                 print("login failed! \(String(describing: error))")
-                self.loginMess = "失敗しました"
+                self.loginMess = "ログインできませんでした"
                 return
             }
 
@@ -80,7 +82,7 @@ class FireViewModel: ObservableObject {
     }
     
     func SignOut(){
-        try? Auth.auth().signOut()
+        //try? Auth.auth().signOut()
         self.pushSignUp.toggle()
         self.userID = ""
         self.loginMess = "ログアウトしました"

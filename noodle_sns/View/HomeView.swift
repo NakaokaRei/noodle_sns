@@ -15,23 +15,7 @@ struct HomeView: View {
         TabView{
             NavigationView{
                 VStack {
-                    HStack {
-                        Spacer()
-                        TextField("投稿", text: $mess)
-                            .navigationBarTitle("ラーメンSNS", displayMode: .inline)
-                            .navigationBarItems(trailing:
-                                HStack {
-                                    Button(action:{self.fireviewmodel.SignOut()}){
-                                        Image(systemName: "arrowshape.turn.up.left.fill")}
-                            })
-                        Button(action: {self.fireviewmodel.post(message: self.mess)}){
-                            Image(systemName: "arrowtriangle.up.circle")
-                        }
-                        Spacer()
-                    }
-                        .border(Color.blue, width: 2)
-                        .cornerRadius(3)
-                        .padding()
+                    PostView()
                     List(self.fireviewmodel.messList){ post in
                         PostRowView(post: post)
                     }
