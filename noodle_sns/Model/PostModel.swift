@@ -13,4 +13,6 @@ struct PostModel: Identifiable {
     var mess: String
     var name: String
     var uid: String
+    var date: String
+    var created: Int
 }

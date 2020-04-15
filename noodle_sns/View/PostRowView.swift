@@ -17,12 +17,13 @@ struct PostRowView: View {
                 Text("@\(post.uid)")
             }
             Text(post.mess)
+            Text(post.date)
         }
     }
 }
 
 struct PostRowView_Previews: PreviewProvider {
     static var previews: some View {
-        PostRowView(post: PostModel(mess: "sample", name: "sample_name", uid: "sample_id"))
+        PostRowView(post: PostModel(mess: "sample", name: "sample_name", uid: "sample_id", date: "2014/07/28 17:11:29", created: 100))
     }
 }

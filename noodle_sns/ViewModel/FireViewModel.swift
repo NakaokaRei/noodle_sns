@@ -21,21 +21,32 @@ class FireViewModel: ObservableObject {
     
     init() {
         DBRef = Database.database().reference()
-        DBRef.child("messages").observe(.childAdded, with: { [weak self](snapshot) -> Void in
-            let message = String(describing: snapshot.childSnapshot(forPath: "message").value!)
-            let uid = String(describing: snapshot.childSnapshot(forPath: "uid").value!)
-            self?.DBRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                let name = value?["name"] as? String ?? ""
-                self?.messList.insert(PostModel(mess: message, name: name, uid: uid), at:0)
-            }) { (error) in
-                print(error.localizedDescription)
-            }
-        })
+        DBRef.child("messages")
+            .observe(.childAdded, with: { [weak self](snapshot) -> Void in
+                let message = String(describing: snapshot.childSnapshot(forPath: "message").value!)
+                let uid = String(describing: snapshot.childSnapshot(forPath: "uid").value!)
+                let date = String(describing: snapshot.childSnapshot(forPath: "date").value!)
+                let created = snapshot.childSnapshot(forPath: "created").value!
+                self?.DBRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    let name = value?["name"] as? String ?? ""
+                    self?.messList.insert(PostModel(mess: message, name: name, uid: uid, date: date, created: created as! Int), at:0)
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
+            })
     }
     
     func post(message: String) {
-        let data = ["message": message, "uid": self.userID]
+        let now1 = NSDate()
+        let now2 = NSDate()
+        let formatter1 = DateFormatter()
+        let formatter2 = DateFormatter()
+        formatter1.dateFormat = "yyyyMMddHHmmss000"
+        formatter2.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        let created = formatter1.string(from: now1 as Date)
+        let date = formatter2.string(from: now2 as Date)
+        let data = ["message": message, "uid": self.userID, "date": date, "created": Int(created) as Any]
         self.DBRef.child("messages").childByAutoId().setValue(data)
     }
     
@@ -58,6 +69,9 @@ class FireViewModel: ObservableObject {
                 self.pushSignUp.toggle()
                 self.userID = Auth.auth().currentUser?.uid ?? ""
                 self.addName(name: "")
+                self.messList = self.messList.sorted(by: { (a, b) -> Bool in
+                    return a.created > b.created
+                })
                 print(self.userID)
                 print("user : \(String(describing: user.user.email)) has been created successfully.")
             }
@@ -75,6 +89,9 @@ class FireViewModel: ObservableObject {
             if let user = user {
                 self.pushSignUp.toggle()
                 self.userID = Auth.auth().currentUser?.uid ?? ""
+                self.messList = self.messList.sorted(by: { (a, b) -> Bool in
+                    return a.created > b.created
+                })
                 print(self.userID)
                 print("user : \(String(describing: user.user.email)) has been signed in successfully.")
             }
@@ -88,4 +105,10 @@ class FireViewModel: ObservableObject {
         self.loginMess = "ログアウトしました"
     }
     
+}
+
+struct FireViewModel_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    }
 }
