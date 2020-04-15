@@ -15,7 +15,7 @@ class FireViewModel: ObservableObject {
     @Published var pushSignUp = false
     @Published var loginMess: String = "ログインしてください"
     @Published var messList: [PostModel] = []
-    @Published var userName: String = "ユーザー名"
+    @Published var userName: String = ""
     var DBRef:DatabaseReference!
     var userID: String = ""
     
@@ -53,9 +53,8 @@ class FireViewModel: ObservableObject {
     func addName(name: String){
         let data = ["name": name]
         self.DBRef.child("users").child(self.userID).setValue(data)
+        self.getUserName()
     }
-    
-    
     
     func add(mail: String, pass: String) {
         Auth.auth().createUser(withEmail: mail, password: pass, completion: { user, error in
@@ -67,8 +66,9 @@ class FireViewModel: ObservableObject {
 
             if let user = user {
                 self.pushSignUp.toggle()
-                self.userID = Auth.auth().currentUser?.uid ?? ""
-                self.addName(name: "")
+                self.getUserId()
+                self.addName(name: "ユーザー名なし")
+                self.getUserName()
                 self.messList = self.messList.sorted(by: { (a, b) -> Bool in
                     return a.created > b.created
                 })
@@ -88,10 +88,11 @@ class FireViewModel: ObservableObject {
 
             if let user = user {
                 self.pushSignUp.toggle()
-                self.userID = Auth.auth().currentUser?.uid ?? ""
+                self.getUserId()
                 self.messList = self.messList.sorted(by: { (a, b) -> Bool in
                     return a.created > b.created
                 })
+                self.getUserName()
                 print(self.userID)
                 print("user : \(String(describing: user.user.email)) has been signed in successfully.")
             }
@@ -105,10 +106,18 @@ class FireViewModel: ObservableObject {
         self.loginMess = "ログアウトしました"
     }
     
-}
-
-struct FireViewModel_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    func getUserName(){
+        self.DBRef.child("users").child(self.userID).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            self.userName = value?["name"] as? String ?? ""
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
+    
+    func getUserId(){
+        self.userID = Auth.auth().currentUser?.uid ?? ""
+    }
+    
+    
 }
