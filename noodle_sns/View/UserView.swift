@@ -18,6 +18,9 @@ struct UserView: View {
             Button(action: {self.fireviewmodel.addName(name: self.userName)}){
                 Text("ユーザー名の変更")
             }
+            Button(action: {self.fireviewmodel.SignOut()}){
+                Text("ログアウト")
+            }
         }
     }
 }

@@ -13,31 +13,33 @@ struct HomeView: View {
     @State var mess: String = ""
     var body: some View {
         TabView{
-            NavigationView{
-                VStack {
-                    PostView()
-                    List(self.fireviewmodel.messList){ post in
-                        PostRowView(post: post)
-                    }
-                }
-            }
-                .tabItem{
-                    VStack {
-                        Image(systemName: "message")
-                        Text("Post")
-                    }
-                }
             UserView()
                 .tabItem{
                     VStack {
                         Image(systemName: "person.circle")
                         Text("User")
                     }
-                    
                 }
-            
+            PostView()
+                .tabItem{
+                    VStack {
+                        Image(systemName: "paperplane")
+                        Text("Post")
+                    }
+                }
+            NavigationView{
+                List(self.fireviewmodel.messList){ post in
+                    PostRowView(post: post)
+                }
+                    .navigationBarTitle("ラーメンSNS", displayMode: .inline)
+            }
+                .tabItem{
+                    VStack {
+                        Image(systemName: "message")
+                        Text("Time Line")
+                    }
+                }
         }
-        
     }
 }
 

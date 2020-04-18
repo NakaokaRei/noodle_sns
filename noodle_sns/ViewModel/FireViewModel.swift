@@ -10,7 +10,7 @@ import Combine
 import Firebase
 import SwiftUI
 
-class FireViewModel: ObservableObject {
+class FireViewModel: ObservableObject{
     
     @Published var pushSignUp = false
     @Published var loginMess: String = "ログインしてください"
@@ -37,6 +37,7 @@ class FireViewModel: ObservableObject {
             })
     }
     
+    //投稿
     func post(message: String) {
         let now1 = NSDate()
         let now2 = NSDate()
@@ -50,12 +51,14 @@ class FireViewModel: ObservableObject {
         self.DBRef.child("messages").childByAutoId().setValue(data)
     }
     
+    //ユーザーネーム変更
     func addName(name: String){
         let data = ["name": name]
         self.DBRef.child("users").child(self.userID).setValue(data)
         self.getUserName()
     }
     
+    //アカウント新規作成
     func add(mail: String, pass: String) {
         Auth.auth().createUser(withEmail: mail, password: pass, completion: { user, error in
             if let error = error {
@@ -78,6 +81,7 @@ class FireViewModel: ObservableObject {
         })
     }
     
+    //ログイン
     func SignIn(mail :String, pass: String){
         Auth.auth().signIn(withEmail: mail, password: pass) { user, error in
             if error != nil {
@@ -99,6 +103,7 @@ class FireViewModel: ObservableObject {
         }
     }
     
+    //ログアウト
     func SignOut(){
         //try? Auth.auth().signOut()
         self.pushSignUp.toggle()
@@ -118,6 +123,4 @@ class FireViewModel: ObservableObject {
     func getUserId(){
         self.userID = Auth.auth().currentUser?.uid ?? ""
     }
-    
-    
 }

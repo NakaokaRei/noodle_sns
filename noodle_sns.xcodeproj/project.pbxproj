@@ -19,6 +19,7 @@
 		B1B3B1C42441E1DD008E0DCE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B3B1C32441E1DD008E0DCE /* UserView.swift */; };
 		B1B3B1C72441E608008E0DCE /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B3B1C62441E608008E0DCE /* PostModel.swift */; };
 		B1DDC42624433B7F00B90BBF /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DDC42524433B7F00B90BBF /* PostView.swift */; };
+		B1FAFB19244B43640024BACB /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FAFB18244B43640024BACB /* ImagePickerView.swift */; };
 		B1FCDB542442243400F7102A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1FCDB532442243400F7102A /* GoogleService-Info.plist */; };
 		DEAD4A5C7C8B11F10A6A9556 /* Pods_noodle_sns.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16AEC91817E7D9A1D079C7CE /* Pods_noodle_sns.framework */; };
 /* End PBXBuildFile section */
@@ -41,6 +42,7 @@
 		B1B3B1C32441E1DD008E0DCE /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		B1B3B1C62441E608008E0DCE /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		B1DDC42524433B7F00B90BBF /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		B1FAFB18244B43640024BACB /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		B1FCDB532442243400F7102A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "noodle_sns/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 				B1B3B1C12441DBAD008E0DCE /* PostRowView.swift */,
 				B1B3B1C32441E1DD008E0DCE /* UserView.swift */,
 				B1DDC42524433B7F00B90BBF /* PostView.swift */,
+				B1FAFB18244B43640024BACB /* ImagePickerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				B1B3B1C72441E608008E0DCE /* PostModel.swift in Sources */,
 				B1198D592440B07C00C8877F /* AppDelegate.swift in Sources */,
 				B1B3B1C22441DBAD008E0DCE /* PostRowView.swift in Sources */,
+				B1FAFB19244B43640024BACB /* ImagePickerView.swift in Sources */,
 				B1B3B1C42441E1DD008E0DCE /* UserView.swift in Sources */,
 				B1B3B1BF2441BF8B008E0DCE /* FireViewModel.swift in Sources */,
 				B1198D5B2440B07C00C8877F /* SceneDelegate.swift in Sources */,

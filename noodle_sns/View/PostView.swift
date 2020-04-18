@@ -11,20 +11,30 @@ import SwiftUI
 struct PostView: View {
     @EnvironmentObject var fireviewmodel: FireViewModel
     @State var mess: String = ""
+    @State var isShowingImagePicker = false
+    @State var image = UIImage()
     var body: some View {
-        HStack {
-            Spacer()
-            TextField("投稿", text: $mess)
-                .navigationBarTitle("ラーメンSNS", displayMode: .inline)
-                .navigationBarItems(trailing:
-                    HStack {
-                        Button(action:{self.fireviewmodel.SignOut()}){
-                            Image(systemName: "arrowshape.turn.up.left.fill")}
+        VStack {
+            HStack {
+                Spacer()
+                TextField("投稿", text: $mess)
+                Button(action: {self.fireviewmodel.post(message: self.mess)}){
+                    Image(systemName: "arrowtriangle.up.circle")
+                }
+                Button(action: {self.isShowingImagePicker.toggle()}){
+                    Image(systemName: "camera")
+                }.sheet(isPresented: $isShowingImagePicker, content: {
+                    ImagePickerView(isPresented: self.$isShowingImagePicker, selectedImage: self.$image)
                 })
-            Button(action: {self.fireviewmodel.post(message: self.mess)}){
-                Image(systemName: "arrowtriangle.up.circle")
+                Spacer()
             }
-            Spacer()
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 200, height: 200)
+                .border(Color.black, width: 1)
+                .clipped()
+                .padding()
         }
             .border(Color.blue, width: 2)
             .cornerRadius(3)
