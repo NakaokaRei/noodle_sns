@@ -9,6 +9,7 @@
 import Combine
 import Firebase
 import SwiftUI
+import UIKit
 
 class FireViewModel: ObservableObject{
     
@@ -26,19 +27,20 @@ class FireViewModel: ObservableObject{
                 let message = String(describing: snapshot.childSnapshot(forPath: "message").value!)
                 let uid = String(describing: snapshot.childSnapshot(forPath: "uid").value!)
                 let date = String(describing: snapshot.childSnapshot(forPath: "date").value!)
+                let image_url = String(describing: snapshot.childSnapshot(forPath: "image_url").value!)
                 let created = snapshot.childSnapshot(forPath: "created").value!
                 self?.DBRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as? NSDictionary
                     let name = value?["name"] as? String ?? ""
-                    self?.messList.insert(PostModel(mess: message, name: name, uid: uid, date: date, created: created as! Int), at:0)
-                }) { (error) in
+                    self?.messList.insert(PostModel(mess: message, name: name, uid: uid, date: date, created: created as! Int, image_url: image_url), at:0)
+                }){(error) in
                     print(error.localizedDescription)
                 }
             })
     }
     
     //投稿
-    func post(message: String) {
+    func post(message: String, image: UIImage) {
         let now1 = NSDate()
         let now2 = NSDate()
         let formatter1 = DateFormatter()
@@ -47,8 +49,26 @@ class FireViewModel: ObservableObject{
         formatter2.dateFormat = "yyyy/MM/dd HH:mm:ss"
         let created = formatter1.string(from: now1 as Date)
         let date = formatter2.string(from: now2 as Date)
-        let data = ["message": message, "uid": self.userID, "date": date, "created": Int(created) as Any]
-        self.DBRef.child("messages").childByAutoId().setValue(data)
+        let uuid = NSUUID().uuidString
+        guard let imageData = image.jpegData(compressionQuality: 0.3) else {return}
+        let imageRef = Storage.storage().reference().child("postImages/\(uuid).jpg")
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/jpeg"
+        imageRef.putData(imageData, metadata: metaData) { (metaData, error) in
+            if error != nil {
+                print("Unable to upload image.")
+                return
+            }
+            imageRef.downloadURL { (url, error) in
+                if error != nil {
+                    print("Unable to download URL.")
+                }
+                guard url != nil else { return }
+                //print(url!)
+                let data = ["message": message, "uid": self.userID, "date": date, "created": Int(created) as Any, "image_url": url!.absoluteString as NSString]
+                self.DBRef.child("messages").childByAutoId().setValue(data)
+            }
+        }
     }
     
     //ユーザーネーム変更

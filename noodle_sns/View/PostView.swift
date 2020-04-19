@@ -18,7 +18,7 @@ struct PostView: View {
             HStack {
                 Spacer()
                 TextField("投稿", text: $mess)
-                Button(action: {self.fireviewmodel.post(message: self.mess)}){
+                Button(action: {self.fireviewmodel.post(message: self.mess, image: self.image)}){
                     Image(systemName: "arrowtriangle.up.circle")
                 }
                 Button(action: {self.isShowingImagePicker.toggle()}){

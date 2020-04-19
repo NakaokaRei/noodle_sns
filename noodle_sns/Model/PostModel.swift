@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct PostModel: Identifiable {
     var id = UUID()
@@ -15,4 +16,5 @@ struct PostModel: Identifiable {
     var uid: String
     var date: String
     var created: Int
+    var image_url: String
 }

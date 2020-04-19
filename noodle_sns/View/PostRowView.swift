@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import Firebase
+import UIKit
 
 struct PostRowView: View {
     var post: PostModel
@@ -18,12 +20,30 @@ struct PostRowView: View {
             }
             Text(post.mess)
             Text(post.date)
+            Image(uiImage: self.getImageByUrl(url: (post.image_url)))
+            .resizable()
+            .scaledToFill()
+            .frame(width: 200, height: 200)
+            .border(Color.black, width: 1)
+            .clipped()
+            .padding()
         }
+    }
+    
+    func getImageByUrl(url: String) -> UIImage{
+        let url = URL(string: url)
+        do {
+            let data = try Data(contentsOf: url!)
+            return UIImage(data: data)!
+        } catch let err {
+            print("Error : \(err.localizedDescription)")
+        }
+        return UIImage()
     }
 }
 
 struct PostRowView_Previews: PreviewProvider {
     static var previews: some View {
-        PostRowView(post: PostModel(mess: "sample", name: "sample_name", uid: "sample_id", date: "2014/07/28 17:11:29", created: 100))
+        PostRowView(post: PostModel(mess: "sample", name: "sample_name", uid: "sample_id", date: "2014/07/28 17:11:29", created: 100, image_url: ""))
     }
 }
