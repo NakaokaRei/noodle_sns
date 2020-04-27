@@ -16,5 +16,5 @@ struct PostModel: Identifiable {
     var uid: String
     var date: String
     var created: Int
-    var image_url: String
+    var image: UIImage
 }

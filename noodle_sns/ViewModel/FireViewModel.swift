@@ -27,12 +27,12 @@ class FireViewModel: ObservableObject{
                 let message = String(describing: snapshot.childSnapshot(forPath: "message").value!)
                 let uid = String(describing: snapshot.childSnapshot(forPath: "uid").value!)
                 let date = String(describing: snapshot.childSnapshot(forPath: "date").value!)
-                let image_url = String(describing: snapshot.childSnapshot(forPath: "image_url").value!)
+                let image = self?.getImageByUrl(url: String(describing: snapshot.childSnapshot(forPath: "image_url").value!)) 
                 let created = snapshot.childSnapshot(forPath: "created").value!
                 self?.DBRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as? NSDictionary
                     let name = value?["name"] as? String ?? ""
-                    self?.messList.insert(PostModel(mess: message, name: name, uid: uid, date: date, created: created as! Int, image_url: image_url), at:0)
+                    self?.messList.insert(PostModel(mess: message, name: name, uid: uid, date: date, created: created as! Int, image: image!), at:0)
                 }){(error) in
                     print(error.localizedDescription)
                 }
@@ -143,4 +143,16 @@ class FireViewModel: ObservableObject{
     func getUserId(){
         self.userID = Auth.auth().currentUser?.uid ?? ""
     }
+    
+    func getImageByUrl(url: String) -> UIImage{
+        let url = URL(string: url)
+        do {
+            let data = try Data(contentsOf: url!)
+            return UIImage(data: data)!
+        } catch let err {
+            print("Error : \(err.localizedDescription)")
+        }
+        return UIImage()
+    }
+    
 }
