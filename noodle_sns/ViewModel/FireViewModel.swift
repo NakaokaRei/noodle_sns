@@ -19,15 +19,20 @@ class FireViewModel: ObservableObject{
     @Published var userName: String = ""
     var DBRef:DatabaseReference!
     var userID: String = ""
+    var load: Bool = false
     
     init() {
-        DBRef = Database.database().reference()
-        DBRef.child("messages")
+        loadData()
+    }
+    
+    func loadData(){
+        self.DBRef = Database.database().reference()
+        self.DBRef.child("messages")
             .observe(.childAdded, with: { [weak self](snapshot) -> Void in
                 let message = String(describing: snapshot.childSnapshot(forPath: "message").value!)
                 let uid = String(describing: snapshot.childSnapshot(forPath: "uid").value!)
                 let date = String(describing: snapshot.childSnapshot(forPath: "date").value!)
-                let image = self?.getImageByUrl(url: String(describing: snapshot.childSnapshot(forPath: "image_url").value!)) 
+                let image = self?.getImageByUrl(url: String(describing: snapshot.childSnapshot(forPath: "image_url").value!))
                 let created = snapshot.childSnapshot(forPath: "created").value!
                 self?.DBRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as? NSDictionary
@@ -37,6 +42,7 @@ class FireViewModel: ObservableObject{
                     print(error.localizedDescription)
                 }
             })
+        
     }
     
     //投稿
