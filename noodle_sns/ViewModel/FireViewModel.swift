@@ -19,10 +19,9 @@ class FireViewModel: ObservableObject{
     @Published var userName: String = ""
     var DBRef:DatabaseReference!
     var userID: String = ""
-    var load: Bool = false
     
     init() {
-        loadData()
+       loadData()
     }
     
     func loadData(){
@@ -32,17 +31,16 @@ class FireViewModel: ObservableObject{
                 let message = String(describing: snapshot.childSnapshot(forPath: "message").value!)
                 let uid = String(describing: snapshot.childSnapshot(forPath: "uid").value!)
                 let date = String(describing: snapshot.childSnapshot(forPath: "date").value!)
-                let image = self?.getImageByUrl(url: String(describing: snapshot.childSnapshot(forPath: "image_url").value!))
+                let image_url = snapshot.childSnapshot(forPath: "image_url").value!
                 let created = snapshot.childSnapshot(forPath: "created").value!
                 self?.DBRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as? NSDictionary
                     let name = value?["name"] as? String ?? ""
-                    self?.messList.insert(PostModel(mess: message, name: name, uid: uid, date: date, created: created as! Int, image: image!), at:0)
+                    self?.messList.insert(PostModel(mess: message, name: name, uid: uid, date: date, created: created as! Int, image_url: image_url as! String), at:0)
                 }){(error) in
                     print(error.localizedDescription)
                 }
             })
-        
     }
     
     //投稿
@@ -160,5 +158,4 @@ class FireViewModel: ObservableObject{
         }
         return UIImage()
     }
-    
 }

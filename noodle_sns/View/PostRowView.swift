@@ -20,8 +20,7 @@ struct PostRowView: View {
             }
             Text(post.mess)
             Text(post.date)
-            Image(uiImage: post.image)
-            .resizable()
+            URLImage(url: post.image_url)
             .scaledToFill()
             .frame(width: 200, height: 200)
             .border(Color.black, width: 1)
@@ -29,11 +28,10 @@ struct PostRowView: View {
             .padding()
         }
     }
-    
 }
 
 struct PostRowView_Previews: PreviewProvider {
     static var previews: some View {
-        PostRowView(post: PostModel(mess: "sample", name: "sample_name", uid: "sample_id", date: "2014/07/28 17:11:29", created: 100, image: UIImage()))
+        PostRowView(post: PostModel(mess: "sample", name: "sample_name", uid: "sample_id", date: "2014/07/28 17:11:29", created: 100, image_url: ""))
     }
 }
