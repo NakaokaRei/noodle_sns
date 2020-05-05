@@ -21,11 +21,11 @@ struct PostRowView: View {
             Text(post.mess)
             Text(post.date)
             URLImage(url: post.image_url)
-            .scaledToFill()
-            .frame(width: 200, height: 200)
-            .border(Color.black, width: 1)
-            .clipped()
-            .padding()
+                .scaledToFill()
+                .frame(width: 200, height: 200)
+                .border(Color.black, width: 1)
+                .clipped()
+                .padding()
         }
     }
 }
